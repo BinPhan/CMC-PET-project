@@ -25,7 +25,10 @@ class User extends Model
     use HasFactory;
 
     public $table = 'users';
-    
+
+    const ROLE_SUBSCRIBER = 1;
+    const ROLE_WRITER = 2;
+    const ROLE_ADMIN = 3;
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -74,5 +77,5 @@ class User extends Model
         'role' => 'required|boolean'
     ];
 
-    
+
 }
