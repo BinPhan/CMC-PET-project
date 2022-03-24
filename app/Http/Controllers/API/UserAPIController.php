@@ -17,6 +17,7 @@ use Response;
  * @package App\Http\Controllers\API
  */
 
+
 class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -33,9 +34,18 @@ class UserAPIController extends AppBaseController
      *
      * @param Request $request
      * @return Response
+     * 
+     * 
+     * /**
+     * @OA\Get(
+     *     path="/",
+     *     description="Home page",
+     *     @OA\Response(response="default", description="Welcome page")
+     * )
      */
     public function index(Request $request)
     {
+
         $users = $this->userRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
@@ -154,7 +164,7 @@ class UserAPIController extends AppBaseController
                 throw new \Exception('Error in Login');
             }
 
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
+            $tokenResult = $user->createToken('authToken', [''])->plainTextToken;
 
             return response()->json([
                 'status_code' => 200,

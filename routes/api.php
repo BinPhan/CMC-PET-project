@@ -16,13 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::post('login', 'App\Http\Controllers\API\UserAPIController@login');
 Route::post('user/writer', 'App\Http\Controllers\API\UserAPIController@login');
 Route::post('user/subscriber', 'App\Http\Controllers\API\UserAPIController@login');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+})->name('lmao');
 
-Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
-Route::resource('posts', PostAPIController::class);
+Route::group(['middleware' => ['auth:sanctum', 'custom']], function () {
+    Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+
+    Route::resource('posts', PostAPIController::class);
+});
