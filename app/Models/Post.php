@@ -2,15 +2,50 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as Model;
 
+
+
+/**
+ * Class Post
+ * @package App\Models
+ * @version March 24, 2022, 3:26 am UTC
+ *
+ * @property string $title
+ * @property string $description
+ */
 class Post extends Model
 {
-    use HasFactory;
 
-    protected $fillable = [
+
+    public $table = 'posts';
+    
+
+
+
+    public $fillable = [
         'title',
-        'description',
+        'description'
     ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'title' => 'string',
+        'description' => 'string'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'title' => 'required'
+    ];
+
+    
 }
