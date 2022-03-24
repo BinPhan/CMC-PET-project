@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\PostAPIController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::resource('users', App\Http\Controllers\API\UserAPIController::class);
+Route::resource('posts', PostAPIController::class);
+
