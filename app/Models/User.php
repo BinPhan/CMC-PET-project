@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -18,14 +19,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $remember_token
  * @property boolean $role
  */
-class User extends Model
+class User extends AuthUser
 {
-    use SoftDeletes;
+
+    use HasApiTokens, HasFactory, Notifiable;
+    // use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -55,7 +58,7 @@ class User extends Model
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
-        'role' => 'boolean'
+        'role' => 'integer'
     ];
 
     /**
@@ -73,6 +76,4 @@ class User extends Model
         'updated_at' => 'nullable',
         'role' => 'required|boolean'
     ];
-
-    
 }
