@@ -77,6 +77,6 @@ class User extends AuthUser
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'role' => 'required|boolean'
+        'role' => 'required|integer'
     ];
 }

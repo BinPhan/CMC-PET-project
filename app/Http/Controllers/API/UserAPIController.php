@@ -57,13 +57,29 @@ class UserAPIController extends AppBaseController
      * @return Response
      * 
      * 
-     * /**
      * @OA\Get(
+     *     summary="Get list user",
+     *     operationId="List user",
      *     security={{"sanctum":{}}},
-     *     tags={"users"},
+     *     tags={"User"},
      *     path="/api/users",
      *     description="Get list of users",
-     *     @OA\Response(response="200", description="User list", @OA\JsonContent())
+     *     @OA\Parameter(
+     *          name="seach params",
+     *          description="Search params",
+     *          required=false,
+     *          in="path",
+     *          @OA\Schema(
+     *              ref="#/components/schemas/User"
+     *          )
+     *      ),
+     *     @OA\Response(
+     *      response="200", 
+     *      description="User list", 
+     *      @OA\JsonContent(
+     *              ref="#/components/schemas/User"
+     * )
+     *     )
      * )
      */
     public function index(Request $request)
@@ -82,6 +98,27 @@ class UserAPIController extends AppBaseController
      * Store a newly created User in storage.
      * POST /users
      *
+     * @OA\Post(
+     *  tags={"User"},
+     *  operationId="Create User",
+     *  path="/api/users",
+     *  security={{"sanctum":{}}},
+     * 
+     *  @OA\RequestBody(
+     *      @OA\JsonContent(
+     *              ref="#/components/schemas/User"
+     *      )
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  ),
+     *  @OA\Response(
+     *      response=500,
+     *      description="Internal error"
+     *  )
+     * )
+     * 
      * @param CreateUserAPIRequest $request
      *
      * @return Response
@@ -89,6 +126,8 @@ class UserAPIController extends AppBaseController
     public function store(CreateUserAPIRequest $request)
     {
         $input = $request->all();
+
+        $input['password'] = \bcrypt($input['password']);
 
         $user = $this->userRepository->create($input);
 
@@ -99,6 +138,33 @@ class UserAPIController extends AppBaseController
      * Display the specified User.
      * GET|HEAD /users/{id}
      *
+     * @OA\Get(
+     *  
+     *  tags={"User"},
+     *  operationId="Show User",
+     *  path="/api/users/{id}",
+     *  security={{"sanctum":{}}},
+     * 
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      @OA\Schema(
+     *              type="integer"
+     *      )
+     *  ),
+     *  @OA\RequestBody(
+     *      
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  ),
+     *  @OA\Response(
+     *      response=500,
+     *      description="Internal error"
+     *  )
+     * )
+     * 
      * @param int $id
      *
      * @return Response
@@ -123,6 +189,31 @@ class UserAPIController extends AppBaseController
      * @param UpdateUserAPIRequest $request
      *
      * @return Response
+     * 
+     * @OA\Put(
+     *  path="/api/users/{id}",
+     *  tags={"User"},
+     *  operationId="Edit user",
+     *  security={{"sanctum":{}}},
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path"
+     *  ),
+     *  
+     *  @OA\RequestBody(
+     *      @OA\JsonContent(
+     *              ref="#/components/schemas/User"
+     *      )
+     *  ),
+     *  @OA\Response(
+     *      response=200,
+     *      description="Success"
+     *  ),
+     *  @OA\Response(
+     *      response=500,
+     *      description="Internal error"
+     *  )
+     * )
      */
     public function update($id, UpdateUserAPIRequest $request)
     {
@@ -134,6 +225,8 @@ class UserAPIController extends AppBaseController
         if (empty($user)) {
             return $this->sendError('User not found');
         }
+
+        $input['password'] = \bcrypt($input['password']);
 
         $user = $this->userRepository->update($input, $id);
 
@@ -149,6 +242,43 @@ class UserAPIController extends AppBaseController
      * @throws \Exception
      *
      * @return Response
+     * 
+     *      @OA\Delete(
+     *      path="/api/users/{id}",
+     *      operationId="delete user",
+     *      tags={"User"},
+     *      summary="Delete existing user",
+     *      security={{"sanctum":{}}},
+     * 
+     *      description="Deletes an user and returns no content",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="User id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     * 
      */
     public function destroy($id)
     {
@@ -171,6 +301,39 @@ class UserAPIController extends AppBaseController
      * 
      * @return Response
      * 
+     * @OA\Post(
+     * 
+     *  path="/api/login",
+     *  summary="Login",
+     *  tags={"User"},
+     *  operationId="login",
+     *  description="Login",
+     * 
+     *  @OA\RequestBody(
+     *      request="true",
+     *      required=true,
+     *      description="User credentials",
+     *      @OA\JsonContent(
+     *          required={"email", "password"},
+     *          @OA\Property(property="email", type="string", format="email", example="bin@gmail.com"),
+     *          @OA\Property(property="password", type="string", format="password", example="123"),
+     *      )
+     *  ),
+     *  @OA\Response(
+     *    response=422,
+     *    description="Wrong credentials response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again"),
+     *      )
+     *    ),
+     *  @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example=""),
+     *      )
+     *    )
+     * )
      * 
      */
     public function login(Request $request)
