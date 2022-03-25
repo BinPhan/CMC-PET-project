@@ -16,7 +16,12 @@ class CustomPermission
      */
     public function handle(Request $request, Closure $next)
     {
-        \dd($request->user()->role);
-        return $next($request);
+        $apiName = $request->route()->getName();
+        $user = $request->user();
+        if ($user->tokenCan($apiName)) {
+            return $next($request);
+        } else {
+            return \response('Unauthorized', 401);
+        }
     }
 }

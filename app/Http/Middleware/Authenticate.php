@@ -14,25 +14,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+
+        // return $next($request);
         if (!$request->expectsJson()) {
             return route('login');
         }
-    }
-
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string[]  ...$guards
-     * @return mixed
-     *
-     * @throws \Illuminate\Auth\AuthenticationException
-     */
-    public function handle($request, $next, ...$guards)
-    {
-        $this->authenticate($request, $guards);
-
-        return $next($request);
     }
 }

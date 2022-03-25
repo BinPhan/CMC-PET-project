@@ -17,7 +17,28 @@ use Response;
  * @package App\Http\Controllers\API
  */
 
-
+/**
+ * @OA\Schema(
+ *  schema="User",
+ *  title="User schema",
+ * 	@OA\Property(
+ * 		property="name",
+ * 		type="string"
+ * 	),
+ * 	@OA\Property(
+ * 		property="email",
+ * 		type="string"
+ * 	),
+ * 	@OA\Property(
+ * 		property="password",
+ * 		type="string"
+ * 	),
+ * 	@OA\Property(
+ * 		property="role",
+ * 		type="integer"
+ * 	)
+ * )
+ */
 class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -38,9 +59,11 @@ class UserAPIController extends AppBaseController
      * 
      * /**
      * @OA\Get(
-     *     path="/",
-     *     description="Home page",
-     *     @OA\Response(response="default", description="Welcome page")
+     *     security={{"sanctum":{}}},
+     *     tags={"users"},
+     *     path="/api/users",
+     *     description="Get list of users",
+     *     @OA\Response(response="200", description="User list", @OA\JsonContent())
      * )
      */
     public function index(Request $request)
@@ -141,6 +164,15 @@ class UserAPIController extends AppBaseController
         return $this->sendSuccess('User deleted successfully');
     }
 
+    /**
+     * Login user.
+     * 
+     * @param Request $request
+     * 
+     * @return Response
+     * 
+     * 
+     */
     public function login(Request $request)
     {
         try {
@@ -164,7 +196,7 @@ class UserAPIController extends AppBaseController
                 throw new \Exception('Error in Login');
             }
 
-            $tokenResult = $user->createToken('authToken', [''])->plainTextToken;
+            $tokenResult = $user->createToken('authToken', config('api-permission')[$user->role])->plainTextToken;
 
             return response()->json([
                 'status_code' => 200,
