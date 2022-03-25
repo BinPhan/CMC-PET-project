@@ -25,13 +25,6 @@ class UserAPIController extends AppBaseController
         $this->userRepository = $userRepo;
     }
 
-    /**
-     * Display a listing of the User.
-     * GET|HEAD /users
-     *
-     * @param Request $request
-     * @return Response
-     */
     public function index(Request $request)
     {
         $users = $this->userRepository->all(

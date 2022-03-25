@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use Eloquent as Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -18,11 +22,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $remember_token
  * @property boolean $role
  */
-class User extends Model
+class User extends Model implements Authenticatable
 {
     use SoftDeletes;
+    use AuthenticableTrait;
 
     use HasFactory;
+    use Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -58,7 +64,6 @@ class User extends Model
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
-        'role' => 'boolean'
     ];
 
     /**
@@ -74,7 +79,6 @@ class User extends Model
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'role' => 'required|boolean'
     ];
 
 

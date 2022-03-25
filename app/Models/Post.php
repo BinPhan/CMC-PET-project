@@ -16,12 +16,7 @@ use Illuminate\Database\Eloquent\Model as Model;
  */
 class Post extends Model
 {
-
-
     public $table = 'posts';
-    
-
-
 
     public $fillable = [
         'title',
@@ -47,5 +42,5 @@ class Post extends Model
         'title' => 'required'
     ];
 
-    
+
 }
