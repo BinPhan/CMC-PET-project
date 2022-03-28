@@ -70,10 +70,13 @@ class User extends AuthUser
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
+        'name' => ['required', 'string', 'max:255'],
+        'email' => 'required|string|max:255|email',
         'email_verified_at' => 'nullable',
-        'password' => 'required|string|max:255',
+        'password' => [
+            'required', 'string', 'max:255', 'min:8',
+            'regex:/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E])+/'
+        ],
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
