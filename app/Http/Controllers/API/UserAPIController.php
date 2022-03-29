@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class UserController
@@ -51,10 +52,14 @@ class UserAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateUserAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
+        $validator = Validator::make($request->all(), User::$rules);
 
+        if ($validator->fails()) {
+            return $validator->messages();
+        }
         $user = $this->userRepository->create($input);
 
         return $this->sendResponse($user->toArray(), 'User saved successfully');

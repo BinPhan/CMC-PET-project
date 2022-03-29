@@ -25,7 +25,14 @@ class UpdateUserAPIRequest extends APIRequest
     public function rules()
     {
         $rules = User::$rules;
-        
+
         return $rules;
+    }
+
+    public function messages()
+    {
+        $messages = User::$messages;
+
+        return $messages;
     }
 }

@@ -26,4 +26,9 @@ class CreateUserAPIRequest extends APIRequest
     {
         return User::$rules;
     }
+
+    public function messages()
+    {
+        return User::$messages;
+    }
 }
