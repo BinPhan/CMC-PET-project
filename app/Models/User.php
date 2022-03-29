@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -18,9 +19,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $remember_token
  * @property boolean $role
  */
-class User extends Model
+class User extends AuthUser
 {
-    use SoftDeletes;
+
+    use HasApiTokens, HasFactory, Notifiable;
+    // use SoftDeletes;
 
     use HasFactory;
 
@@ -58,7 +61,7 @@ class User extends Model
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
-        'role' => 'boolean'
+        'role' => 'integer'
     ];
 
     /**
@@ -67,15 +70,16 @@ class User extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|max:255',
+        'name' => ['required', 'string', 'max:255'],
+        'email' => 'required|string|max:255|email',
         'email_verified_at' => 'nullable',
-        'password' => 'required|string|max:255',
+        'password' => [
+            'required', 'string', 'max:255', 'min:8',
+            'regex:/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E])+/'
+        ],
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'role' => 'required|boolean'
+        'role' => 'required|integer'
     ];
-
-
 }
