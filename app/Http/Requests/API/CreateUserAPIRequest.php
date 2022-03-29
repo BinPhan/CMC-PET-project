@@ -26,4 +26,16 @@ class CreateUserAPIRequest extends APIRequest
     {
         return User::$rules;
     }
+
+    /**
+     * Get custom validate messages
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'password.regex' => 'Password must contains at least an uppercase letter, a lowercase letter and one special character'
+        ];
+    }
 }
