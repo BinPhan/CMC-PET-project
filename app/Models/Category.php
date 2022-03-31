@@ -24,11 +24,9 @@ class Category extends Model
     use HasFactory;
 
     public $table = 'categories';
-    
+
 
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'name',
@@ -62,5 +60,5 @@ class Category extends Model
         'status' => 'required'
     ];
 
-    
+
 }

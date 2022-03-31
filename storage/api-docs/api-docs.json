@@ -94,7 +94,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Post saved successfully"
+                        "description": "Category saved successfully"
                     },
                     "500": {
                         "description": "Internal error"
@@ -133,7 +133,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Post retrieved successfully"
+                        "description": "Category retrieved successfully"
                     },
                     "500": {
                         "description": "Internal error"
@@ -170,7 +170,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Post deleted successfully"
+                        "description": "Category deleted successfully"
                     }
                 },
                 "security": [
@@ -427,6 +427,207 @@
                 "responses": {
                     "201": {
                         "description": "Post updated successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product_images": {
+            "get": {
+                "tags": [
+                    "productImages"
+                ],
+                "summary": "List all productImages",
+                "operationId": "ba9af88b6828e6c9f5aa04a30b37fb98",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "retrieved"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "productImages"
+                ],
+                "summary": "Create a productImage",
+                "operationId": "cdda44f0d384fe88235347fcda63e813",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "image": {
+                                        "type": "files"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Product Image saved successfully"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/product_images/{id}": {
+            "get": {
+                "tags": [
+                    "productImages"
+                ],
+                "summary": "Get a productImages",
+                "operationId": "3bcb7c238d4cbf298caa66c326d27411",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with mutliple examples",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "An Id value.",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product Image retrieved successfully"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "productImages"
+                ],
+                "summary": "Delete a Category",
+                "operationId": "9c6246e0bca8751f29dc910e0788811d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Parameter with mutliple examples",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "int": {
+                                "summary": "An Id value.",
+                                "value": "1"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product Image deleted successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "productImages"
+                ],
+                "summary": "Update a productImage",
+                "operationId": "5ae822236469738c7251f53bcb9e86d1",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "image": {
+                                        "type": "files"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Product Image updated successfully"
+                    },
+                    "500": {
+                        "description": "Internal error"
                     }
                 },
                 "security": [
