@@ -36,7 +36,7 @@ use Response;
  * 	@OA\Property(
  * 		property="role",
  * 		type="integer"
- * 	)
+ * 	),
  * )
  */
 class UserAPIController extends AppBaseController
@@ -55,8 +55,8 @@ class UserAPIController extends AppBaseController
      *
      * @param Request $request
      * @return Response
-     * 
-     * 
+     *
+     *
      * @OA\Get(
      *     summary="Get list user",
      *     operationId="List user",
@@ -74,8 +74,8 @@ class UserAPIController extends AppBaseController
      *          )
      *      ),
      *     @OA\Response(
-     *      response="200", 
-     *      description="User list", 
+     *      response="200",
+     *      description="User list",
      *      @OA\JsonContent(
      *              ref="#/components/schemas/User"
      *      )
@@ -103,7 +103,7 @@ class UserAPIController extends AppBaseController
      *  operationId="Create User",
      *  path="/api/users",
      *  security={{"sanctum":{}}},
-     * 
+     *
      *  @OA\RequestBody(
      *      @OA\JsonContent(
      *              ref="#/components/schemas/User"
@@ -118,7 +118,7 @@ class UserAPIController extends AppBaseController
      *      description="Internal error"
      *  )
      * )
-     * 
+     *
      * @param CreateUserAPIRequest $request
      *
      * @return Response
@@ -139,12 +139,12 @@ class UserAPIController extends AppBaseController
      * GET|HEAD /users/{id}
      *
      * @OA\Get(
-     *  
+     *
      *  tags={"User"},
      *  operationId="Show User",
      *  path="/api/users/{id}",
      *  security={{"sanctum":{}}},
-     * 
+     *
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -153,7 +153,7 @@ class UserAPIController extends AppBaseController
      *      )
      *  ),
      *  @OA\RequestBody(
-     *      
+     *
      *  ),
      *  @OA\Response(
      *      response=200,
@@ -164,7 +164,7 @@ class UserAPIController extends AppBaseController
      *      description="Internal error"
      *  )
      * )
-     * 
+     *
      * @param int $id
      *
      * @return Response
@@ -189,7 +189,7 @@ class UserAPIController extends AppBaseController
      * @param UpdateUserAPIRequest $request
      *
      * @return Response
-     * 
+     *
      * @OA\Put(
      *  path="/api/users/{id}",
      *  tags={"User"},
@@ -199,7 +199,7 @@ class UserAPIController extends AppBaseController
      *      name="id",
      *      in="path"
      *  ),
-     *  
+     *
      *  @OA\RequestBody(
      *      @OA\JsonContent(
      *              ref="#/components/schemas/User"
@@ -242,14 +242,14 @@ class UserAPIController extends AppBaseController
      * @throws \Exception
      *
      * @return Response
-     * 
+     *
      *      @OA\Delete(
      *      path="/api/users/{id}",
      *      operationId="delete user",
      *      tags={"User"},
      *      summary="Delete existing user",
      *      security={{"sanctum":{}}},
-     * 
+     *
      *      description="Deletes an user and returns no content",
      *      @OA\Parameter(
      *          name="id",
@@ -278,7 +278,7 @@ class UserAPIController extends AppBaseController
      *          description="Resource Not Found"
      *      )
      * )
-     * 
+     *
      */
     public function destroy($id)
     {
@@ -296,19 +296,19 @@ class UserAPIController extends AppBaseController
 
     /**
      * Login user.
-     * 
+     *
      * @param Request $request
-     * 
+     *
      * @return Response
-     * 
+     *
      * @OA\Post(
-     * 
+     *
      *  path="/api/login",
      *  summary="Login",
      *  tags={"User"},
      *  operationId="login",
      *  description="Login",
-     * 
+     *
      *  @OA\RequestBody(
      *      request="true",
      *      required=true,
@@ -334,7 +334,7 @@ class UserAPIController extends AppBaseController
      *      )
      *    )
      * )
-     * 
+     *
      */
     public function login(Request $request)
     {

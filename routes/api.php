@@ -33,3 +33,8 @@ Route::group(['middleware' => ['auth:sanctum', 'custom']], function () {
     Route::resource('posts', PostAPIController::class);
     Route::resource('products', App\Http\Controllers\API\ProductAPIController::class);
 });
+
+
+Route::resource('categories', App\Http\Controllers\API\CategoryAPIController::class);
+
+Route::resource('product_images', App\Http\Controllers\API\ProductImageAPIController::class);

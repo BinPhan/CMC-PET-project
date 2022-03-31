@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd01704cf36760fe18414a74693f5142",
+    "content-hash": "bea225955df17e17a9df15bbd014ff31",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6939,134 +6939,6 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2022-03-11T14:11:15+00:00"
-        },
-        {
-            "name": "mnabialek/laravel-sql-logger",
-            "version": "v2.2.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mnabialek/laravel-sql-logger.git",
-                "reference": "30e5e9dd46a7525074a6642435178e66f5fa3766"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mnabialek/laravel-sql-logger/zipball/30e5e9dd46a7525074a6642435178e66f5fa3766",
-                "reference": "30e5e9dd46a7525074a6642435178e66f5fa3766",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "5.*|6.*|7.*|8.*|9.*",
-                "illuminate/filesystem": "5.*|6.*|7.*|8.*|9.*",
-                "illuminate/support": "5.*|6.*|7.*|8.*|9.*",
-                "mnabialek/laravel-version": "^1.0.3",
-                "nesbot/carbon": "~1.0 || ^2.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "laravel/framework": "9.*",
-                "mockery/mockery": "^1.0",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mnabialek\\LaravelSqlLogger\\Providers\\ServiceProvider"
-                    ]
-                },
-                "thanks": {
-                    "name": "mnabialek/laravel-version",
-                    "url": "https://github.com/mnabialek/laravel-version"
-                },
-                "suggest": {
-                    "symfony/thanks": "Star packages you use running 'composer thanks' command"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Mnabialek\\LaravelSqlLogger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marcin Nabiałek",
-                    "email": "dev@nabialek.org"
-                }
-            ],
-            "description": "Log SQL queries in Laravel/Lumen framework",
-            "keywords": [
-                "laravel",
-                "log",
-                "log sql",
-                "log sql queries",
-                "logger",
-                "lumen",
-                "sql",
-                "sql log",
-                "sql logger"
-            ],
-            "support": {
-                "issues": "https://github.com/mnabialek/laravel-sql-logger/issues",
-                "source": "https://github.com/mnabialek/laravel-sql-logger/tree/v2.2.9"
-            },
-            "time": "2022-02-11T19:43:37+00:00"
-        },
-        {
-            "name": "mnabialek/laravel-version",
-            "version": "v1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mnabialek/laravel-version.git",
-                "reference": "8905b4b763f32c3bb265ca1296789eba060d9c30"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mnabialek/laravel-version/zipball/8905b4b763f32c3bb265ca1296789eba060d9c30",
-                "reference": "8905b4b763f32c3bb265ca1296789eba060d9c30",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/container": "5.*|6.*|7.*|8.*|9.*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.9",
-                "mockery/mockery": "^1.0",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Mnabialek\\LaravelVersion\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marcin Nabiałek",
-                    "email": "dev@nabialek.org"
-                }
-            ],
-            "description": "Get Laravel/Lumen version",
-            "keywords": [
-                "laravel",
-                "laravel version",
-                "lumen",
-                "lumen version"
-            ],
-            "support": {
-                "issues": "https://github.com/mnabialek/laravel-version/issues",
-                "source": "https://github.com/mnabialek/laravel-version/tree/v1.0.5"
-            },
-            "time": "2022-02-11T15:44:00+00:00"
         },
         {
             "name": "mockery/mockery",

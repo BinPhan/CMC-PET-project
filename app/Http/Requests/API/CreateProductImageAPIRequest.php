@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\User;
+use App\Models\ProductImage;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserAPIRequest extends APIRequest
+class CreateProductImageAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,6 @@ class UpdateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = User::$rules;
-
-        return $rules;
-    }
-
-    public function messages()
-    {
-        $messages = User::$messages;
-
-        return $messages;
+        return ProductImage::$rules;
     }
 }
