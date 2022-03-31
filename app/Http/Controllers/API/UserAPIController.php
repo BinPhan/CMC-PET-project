@@ -36,7 +36,7 @@ use Response;
  * 	@OA\Property(
  * 		property="role",
  * 		type="integer"
- * 	)
+ * 	),
  * )
  */
 class UserAPIController extends AppBaseController
