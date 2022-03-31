@@ -125,8 +125,8 @@ class ProductImageAPIController extends AppBaseController
     {
         $input = $request->all();
         $path = $request->file('image')->store('public/images/product_images');
-        $input['path'] = $path;
 
+        $input['path'] = $path;
         $productImage = $this->productImageRepository->create($input);
 
         return $this->sendResponse($productImage->toArray(), 'Product Image saved successfully');

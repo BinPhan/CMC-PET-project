@@ -35,4 +35,5 @@ Route::group(['middleware' => ['auth:sanctum', 'custom']], function () {
 
 
 Route::resource('categories', App\Http\Controllers\API\CategoryAPIController::class);
+
 Route::resource('product_images', App\Http\Controllers\API\ProductImageAPIController::class);

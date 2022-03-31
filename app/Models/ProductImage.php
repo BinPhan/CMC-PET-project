@@ -55,7 +55,7 @@ class ProductImage extends Model
     public static $rules = [
         'product_id' => 'required',
         'type' => 'required',
-        'path' => 'required'
+        'image' => 'required'
     ];
 
 
