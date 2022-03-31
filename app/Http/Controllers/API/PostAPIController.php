@@ -33,6 +33,28 @@ class PostAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      */
+
+    /**
+     * @OA\Get(
+     *     path="/api/posts",
+     *     summary="List all posts",
+     *     tags={"posts"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="title",
+     *         description="",
+     *          in = "query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="retrieved",
+     *     ),
+     * )
+     */
     public function index(Request $request)
     {
         $posts = $this->postRepository->all(
@@ -52,6 +74,32 @@ class PostAPIController extends AppBaseController
      *
      * @return Response
      */
+
+    /**
+     * @OA\Post(
+     *     path="/api/posts",
+     *     summary="Create a post",
+     *     tags={"posts"},
+     *     security={{"sanctum":{}}},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string"
+     *                 ),
+     *                 example={"title": "In the End", "description": "description In the End"}
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Post saved successfully")
+     * )
+     */
     public function store(CreatePostAPIRequest $request)
     {
         $input = $request->all();
@@ -68,6 +116,24 @@ class PostAPIController extends AppBaseController
      * @param int $id
      *
      * @return Response
+     */
+
+    /**
+     * @OA\get(
+     *     path="/api/posts/{id}",
+     *     summary="Get a Post",
+     *     tags={"posts"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         description="Parameter with mutliple examples",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="An Id value."),
+     *     ),
+     *     @OA\Response(response="200", description="Post retrieved successfully")
+     * )
      */
     public function show($id)
     {
@@ -89,6 +155,40 @@ class PostAPIController extends AppBaseController
      * @param UpdatePostAPIRequest $request
      *
      * @return Response
+     */
+
+    /**
+     * @OA\Patch(
+     *     path="/api/posts/{id}",
+     *     summary="Update a Post",
+     *     tags={"posts"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         description="Update a Post",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="An Id value."),
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="title",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="description",
+     *                     type="string"
+     *                 ),
+     *                 example={"title": "In the End", "description": "description In the End"}
+     *             )
+     *         )
+     *     ),
+     *      @OA\Response(response="201", description="Post updated successfully")
+     * )
      */
     public function update($id, UpdatePostAPIRequest $request)
     {
@@ -112,9 +212,27 @@ class PostAPIController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
+     */
+
+    /**
+     * @OA\Delete(
+     *     path="/api/posts/{id}",
+     *     summary="Get a Post",
+     *     tags={"posts"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         description="Parameter with mutliple examples",
+     *         in="path",
+     *         name="id",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         @OA\Examples(example="int", value="1", summary="An Id value."),
+     *     ),
+     *     @OA\Response(response="200", description="Post deleted successfully")
+     * )
      */
     public function destroy($id)
     {
