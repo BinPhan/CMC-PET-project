@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -18,14 +19,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $remember_token
  * @property boolean $role
  */
-class User extends Model
+class User extends AuthUser
 {
-    use SoftDeletes;
+
+    use HasApiTokens, HasFactory, Notifiable;
+    // use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'users';
 
+    const ROLE_SUBSCRIBER = 1;
+    const ROLE_WRITER = 2;
+    const ROLE_ADMIN = 3;
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -33,21 +39,9 @@ class User extends Model
     protected $dates = ['deleted_at'];
 
 
-    public static $messages = [
-        'first_name.required' => 'First Name is required',
-        'last_name.required' => 'Last Name is required',
-        'email.required' => 'Email Name is required',
-        'email.email' => 'Email is not Validate',
-        'password.required' => 'Password  is required',
-        'password.min' => 'Password is at least 8 characters',
-        'password.regex' => 'Password is not Validate',
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
-    ];
 
     public $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'email_verified_at',
         'password',
@@ -62,13 +56,12 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'first_name' => 'string',
-        'last_name' => 'string',
+        'name' => 'string',
         'email' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
-        'role' => 'boolean'
+        'role' => 'integer'
     ];
 
     /**
@@ -77,16 +70,16 @@ class User extends Model
      * @var array
      */
     public static $rules = [
-        'first_name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'email' => 'required|email|string|max:255',
+        'name' => ['required', 'string', 'max:255'],
+        'email' => 'required|string|max:255|email',
         'email_verified_at' => 'nullable',
-        'password' => 'required|string|max:255|min:8|regex:/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!@#$%^&*]).*$/',
+        'password' => [
+            'required', 'string', 'max:255', 'min:8',
+            'regex:/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\x21-\x2F\x3A-\x40\x5B-\x60\x7B-\x7E])+/'
+        ],
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'role' => 'required|boolean'
+        'role' => 'required|integer'
     ];
-
-
 }

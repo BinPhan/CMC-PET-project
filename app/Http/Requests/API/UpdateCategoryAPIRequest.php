@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\API;
 
-use App\Models\User;
+use App\Models\Category;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateUserAPIRequest extends APIRequest
+class UpdateCategoryAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,8 @@ class CreateUserAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return User::$rules;
-    }
-
-    /**
-     * Get custom validate messages
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'password.regex' => 'Password must contains at least an uppercase letter, a lowercase letter and one special character'
-        ];
+        $rules = Category::$rules;
+        
+        return $rules;
     }
 }
