@@ -78,7 +78,7 @@ class UserAPIController extends AppBaseController
      *      description="User list", 
      *      @OA\JsonContent(
      *              ref="#/components/schemas/User"
-     * )
+     *      )
      *     )
      * )
      */

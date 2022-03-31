@@ -13,6 +13,186 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get list product",
+                "description": "Get list of products",
+                "operationId": "List product",
+                "parameters": [
+                    {
+                        "name": "seach params",
+                        "in": "path",
+                        "description": "Search params",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/components/schemas/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Store a newly created Product in storage.",
+                "description": "POST /products",
+                "operationId": "Create Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Display the specified Product.",
+                "description": "GET|HEAD /products/{id}",
+                "operationId": "Show Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update the specified Product in storage.",
+                "description": "PUT/PATCH /products/{id}",
+                "operationId": "Edit product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Product"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete existing product",
+                "description": "Deletes an product and returns no content",
+                "operationId": "delete product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -268,6 +448,28 @@
     },
     "components": {
         "schemas": {
+            "Product": {
+                "title": "Product schema",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Shirt"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "This is a shirt"
+                    },
+                    "features": {
+                        "type": "integer",
+                        "example": "1000"
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "example": "{'name': 'price', 'value': 123},{'name': 'sale_price', 'value': 100},{'name': 'size', 'value': 'md'},{'name': 'size', 'value': 'sm'}"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "title": "User schema",
                 "properties": {
