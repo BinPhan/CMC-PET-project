@@ -124,7 +124,7 @@ class CategoryAPIController extends AppBaseController
      *             )
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Post saved successfully"),
+     *     @OA\Response(response="200", description="Category saved successfully"),
      *     @OA\Response(response="500", description="Internal error")
      * )
      */
@@ -162,7 +162,7 @@ class CategoryAPIController extends AppBaseController
      *         @OA\Schema(type="string"),
      *         @OA\Examples(example="int", value="1", summary="An Id value."),
      *     ),
-     *     @OA\Response(response="200", description="Post retrieved successfully"),
+     *     @OA\Response(response="200", description="Category retrieved successfully"),
      *     @OA\Response(response="500", description="Internal error")
      * )
      */
@@ -259,6 +259,7 @@ class CategoryAPIController extends AppBaseController
      *
      * @return Response
      */
+
     /**
      * @OA\Delete(
      *     path="/api/categories/{id}",
@@ -273,7 +274,7 @@ class CategoryAPIController extends AppBaseController
      *         @OA\Schema(type="string"),
      *         @OA\Examples(example="int", value="1", summary="An Id value."),
      *     ),
-     *     @OA\Response(response="200", description="Post deleted successfully")
+     *     @OA\Response(response="200", description="Category deleted successfully")
      * )
      */
     public function destroy($id)
