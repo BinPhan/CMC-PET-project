@@ -9,7 +9,7 @@ use App\Repositories\BaseRepository;
  * Class CategoryRepository
  * @package App\Repositories
  * @version March 29, 2022, 8:14 am UTC
-*/
+ */
 
 class CategoryRepository extends BaseRepository
 {
@@ -40,5 +40,17 @@ class CategoryRepository extends BaseRepository
     public function model()
     {
         return Category::class;
+    }
+
+    public function assignChild($item, $sourceMaterial)
+    {
+        $children = $sourceMaterial->where('parent_id', $item->id);
+        if (!$children->isEmpty()) {
+            $item->child = $children;
+            $item->child->map(function ($item, $key) use ($sourceMaterial) {
+                $this->assignChild($item, $sourceMaterial);
+                return $item;
+            });
+        }
     }
 }
