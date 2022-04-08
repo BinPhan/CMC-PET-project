@@ -77,10 +77,18 @@ class CategoryAPIController extends AppBaseController
         $categories = $this->categoryRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
-            $request->get('limit')
+            $request->get('limit'),
+            ['id', 'name', 'parent_id']
         );
 
-        return $this->sendResponse($categories->toArray(), 'Categories retrieved successfully');
+        $res = $categories->where('parent_id', 0);
+
+        $res = $res->map(function ($item, $key) use ($categories) {
+            $this->categoryRepository->assignChild($item, $categories);
+            return $item;
+        });
+
+        return $this->sendResponse($res->toArray(), 'Categories retrieved successfully');
     }
 
     /**

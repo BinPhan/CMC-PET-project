@@ -91,14 +91,10 @@ class ProductAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $products = $this->productRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
+        $products = $this->productRepository->searchByParam($request);
 
-        $products->load('attributeValue.attribute');
 
+        $products = $products->paginate($request->limit);
         return $this->sendResponse(ProductResource::collection($products), 'Products retrieved successfully');
     }
 
